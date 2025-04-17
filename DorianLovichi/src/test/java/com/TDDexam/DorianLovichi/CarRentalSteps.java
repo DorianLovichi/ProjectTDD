@@ -22,13 +22,12 @@ import java.util.Optional;
 public class CarRentalSteps {
 
     private CarRentalService carRentalService;
-    private CarRepository carRepository; // mocké à la main
+    private CarRepository carRepository;
 
     private List<Car> cars;
     private Car car;
 
     public CarRentalSteps() {
-        // Création manuelle du mock
         carRepository = mock(CarRepository.class);
         carRentalService = new CarRentalService(carRepository);
     }

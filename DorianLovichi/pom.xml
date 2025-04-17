@@ -20,6 +20,12 @@
 
 	<properties>
 		<java.version>21</java.version>
+			<sonar.host.url>http://localhost:9000</sonar.host.url>
+			<sonar.projectKey>car-rental-service</sonar.projectKey>
+			<sonar.login>[generate a token in SonarQube]</sonar.login>
+			<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+			<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+			<sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/jacoco-reports/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
 
 	<dependencies>
@@ -91,6 +97,35 @@
 					<source>21</source>
 					<target>21</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.10</version>
+				<executions>
+					<execution>
+						<id>prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/jacoco-reports</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- SonarQube Plugin -->
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.9.1.2184</version>
 			</plugin>
 		</plugins>
 	</build>

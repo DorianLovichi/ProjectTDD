@@ -30,7 +30,6 @@ public class CarController {
         carRentalService.returnCar(registrationNumber);
     }
 
-    // Fix these two endpoints by removing the duplicate /cars prefix
     @PostMapping("/add")
     public ResponseEntity<String> addCar(@RequestBody Car car) {
         boolean added = carRentalService.addCar(car);
