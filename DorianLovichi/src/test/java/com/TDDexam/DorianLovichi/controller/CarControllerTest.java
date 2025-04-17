@@ -1,6 +1,5 @@
 package com.TDDexam.DorianLovichi.controller;
 
-package com.TDDexam.DorianLovichi.controller;
 
 import com.TDDexam.DorianLovichi.model.Car;
 import com.TDDexam.DorianLovichi.service.CarRentalService;
@@ -13,6 +12,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import static org.mockito.ArgumentMatchers.any;
+
 
 import java.util.List;
 
@@ -38,9 +39,9 @@ public class CarControllerTest {
 
     @Test
     void testAddCarSuccess() throws Exception {
-        Car newCar = new Car("ABC123", "Peugeot", true);
-        when(carRentalService.addCar(newCar)).thenReturn(true);
+        when(carRentalService.addCar(any(Car.class))).thenReturn(true);
 
+        Car newCar = new Car("ABC123", "Peugeot", true);
         mockMvc.perform(post("/cars/add")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(newCar)))

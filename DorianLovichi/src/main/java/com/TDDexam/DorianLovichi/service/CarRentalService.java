@@ -38,4 +38,21 @@ public class CarRentalService {
             carRepository.updateCar(c);
         });
     }
+
+    public boolean addCar(Car car) {
+        Optional<Car> existing = carRepository.findByRegistrationNumber(car.getRegistrationNumber());
+        if (existing.isPresent()) {
+            return false;
+        }
+        carRepository.addCar(car);
+        return true;
+    }
+
+
+    public List<Car> findCarsByModel(String model) {
+        return carRepository.getAllCars().stream()
+                .filter(c -> c.getModel().equalsIgnoreCase(model))
+                .toList();
+    }
+
 }
